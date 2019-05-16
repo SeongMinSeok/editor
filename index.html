@@ -1,19 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+<meta charset="UTF-8">
+<title>execCommand test</title>
 <script>
-    let xE={};
-    function xFn(e){
-        xE.w.focus();
+    let xE = {};
+
+    function xFn(e)
+    {
+        xE.frame.focus();
+
+        let content = e.innerHTML,
+            view = content + '<br>queryCommandSupported : ' + xE.draw.queryCommandSupported(content);
+
+        e = e.nextSibling;
+        e = e.nodeName.toLowerCase() == 'input' ? e.value : null;
+
+        view += '<br>queryCommandEnabled : ';
+        try { view += xE.draw.queryCommandEnabled(content); } catch (x) { view += 'Error : ' + x.message; }
+        view += '<br>queryCommandState : ';
+        try { view += xE.draw.queryCommandState(content); } catch (x) { view += 'Error : ' + x.message; }
+        view += '<br>queryCommandValue : ';
+        try { view += xE.draw.queryCommandValue(content); } catch (x) { view += 'Error : ' + x.message; }
+        view += '<br>execCommand : ';
+        try { view += xE.draw.execCommand(content, false, e); } catch (x) { view += 'Error : ' + x.message; }
+
+        // xE.m.innerHTML = view;
+    }
+
+    function xHv()
+    {
+        xE.m.innerHTML =
+            xE.draw.body.innerHTML
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+    }
+
+    window.onload = function()
+    {
+        xE.frame = document.getElementById('yF').contentWindow;
+        xE.draw = xE.frame.document;
+
+        xE.draw.write('<!DOCTYPE html><html><head></head><body></body></html>');
+        xE.draw.designMode = 'on';
+
+        // xE.m = document.getElementById('yM');
+
+        xE.frame.focus();
     }
 </script>
 </head>
 <body>
-    
+<div style="padding:2px">
+<button type=button onclick="xFn(this)">italic</button>
+<button type=button onclick="xFn(this)">bold</button>
+<button type=button onclick="xFn(this)">foreColor</button><input type=text size=8>
+<button type=button onclick="xFn(this)">backColor</button><input type=text size=8>
+<button type=button onclick="xFn(this)">fontName</button><input type=text size=8>
+<button type=button onclick="xFn(this)">fontSize</button><input type=text size=2>
+<button type=button onclick="xFn(this)">createLink</button><input type=text size=16>
+<button type=button onclick="xFn(this)">justifyCenter</button>
+<button type=button onclick="xFn(this)">justifyLeft</button>
+<button type=button onclick="xFn(this)">justifyRight</button>
+<button type=button onclick="xFn(this)">insertImage</button><input type=text size=16>
+<!-- <button type=button onclick="xHv()">HTML</button> -->
+</div>
+<iframe id=yF src="about:blank" style="box-sizing:border-box;border:1px solid #999;padding:2px;width:100%;height:150px;"></iframe>
+
 </body>
 </html>
