@@ -8,11 +8,12 @@
 
     function xFn(e)
     {
+        
         xE.frame.focus();
 
         let content = e.innerHTML,
             view = content + '<br>queryCommandSupported : ' + xE.draw.queryCommandSupported(content);
-
+        // alert(content);
         e = e.nextSibling;
         e = e.nodeName.toLowerCase() == 'input' ? e.value : null;
 
@@ -24,7 +25,7 @@
         try { view += xE.draw.queryCommandValue(content); } catch (x) { view += 'Error : ' + x.message; }
         view += '<br>execCommand : ';
         try { view += xE.draw.execCommand(content, false, e); } catch (x) { view += 'Error : ' + x.message; }
-
+       
         // xE.m.innerHTML = view;
     }
 
