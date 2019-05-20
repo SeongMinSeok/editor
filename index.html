@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>execCommand test</title>
+<style>
+    img{
+        background-color: #eee;
+
+/* background-blend-mode: multiply; */
+    }
+</style>
 <script>
     let xE = {};
 
@@ -10,21 +17,26 @@
     {
         
         xE.frame.focus();
-
-        let content = e.innerHTML,
-            view = content + '<br>queryCommandSupported : ' + xE.draw.queryCommandSupported(content);
-        // alert(content);
-        e = e.nextSibling;
-        e = e.nodeName.toLowerCase() == 'input' ? e.value : null;
-
-        view += '<br>queryCommandEnabled : ';
-        try { view += xE.draw.queryCommandEnabled(content); } catch (x) { view += 'Error : ' + x.message; }
-        view += '<br>queryCommandState : ';
-        try { view += xE.draw.queryCommandState(content); } catch (x) { view += 'Error : ' + x.message; }
-        view += '<br>queryCommandValue : ';
-        try { view += xE.draw.queryCommandValue(content); } catch (x) { view += 'Error : ' + x.message; }
-        view += '<br>execCommand : ';
-        try { view += xE.draw.execCommand(content, false, e); } catch (x) { view += 'Error : ' + x.message; }
+   
+      
+        let content = e;
+            // view = content+ xE.draw.queryCommandSupported(content);
+        if(content==="foreColor"){
+            let aa=document.getElementById("aa").value;
+            xE.draw.execCommand(content, false, aa); 
+           
+        }
+        
+        // e = e.nextSibling;
+        // e = e.nodeName.toLowerCase() == 'input' ? e.value : null;
+   
+        // view += '<br>queryCommandEnabled : ';
+        // try { view += xE.draw.queryCommandEnabled(content); } catch (x) { view += 'Error : ' + x.message; }
+        // view += '<br>queryCommandState : ';
+        // try { view += xE.draw.queryCommandState(content); } catch (x) { view += 'Error : ' + x.message; }
+        // view += '<br>queryCommandValue : ';
+        // try { view += xE.draw.queryCommandValue(content); } catch (x) { view += 'Error : ' + x.message; }
+        // view += '<br>execCommand : ';
        
         // xE.m.innerHTML = view;
     }
@@ -53,10 +65,10 @@
 </script>
 </head>
 <body>
-<div style="padding:2px">
-<button type=button onclick="xFn(this)">italic</button>
+<div style="padding:2px;">
+<img id="a"src="public/italic.png" alt="italic" onclick="xFn(this.alt)"></img>
 <button type=button onclick="xFn(this)">bold</button>
-<button type=button onclick="xFn(this)">foreColor</button><input type=text size=8>
+<img src="public/text-color.png" alt="foreColor" onclick="xFn(this.alt)"></img><input id="aa" type=text size=8>
 <button type=button onclick="xFn(this)">backColor</button><input type=text size=8>
 <button type=button onclick="xFn(this)">fontName</button><input type=text size=8>
 <button type=button onclick="xFn(this)">fontSize</button><input type=text size=2>
