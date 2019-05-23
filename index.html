@@ -35,54 +35,84 @@
     }
     #color-popup{
         width: 250px;
-        height: 250px;
+        height: 300px;
         left: 0px;
         top:0px;
         z-index: 1;
         background: #eee;
         position: absolute;
-        /* visibility: hidden; */
+        visibility: hidden;
         display: flex;
         flex-direction: column;
     }
    
-    #cancel{
-         float:right;
-    }
+   
     #text-color-view{
 
         /* position: absolute; */
         /* bottom:0px; */
-      margin: 10px;
-        width: 240px;
-        height: 230px;
-    
+        margin: 13px;
+        width: 227px;
+        height: 200px;
         z-index: 1;
     }
- 
+    #color-result{
+        margin: 3px;
+        height: 20px;
+        float: left;
+    }
+    .cancel{
+        margin: 3px;
+        float: right;
+    }
+    #color-search{
+        margin-top:3px;
+        height: 25px;
+    }
+
     #font_family{
         height: 30px;
     }
-    .color{
+    #color-view{
+        margin-top: 5px;
+        
+    }
+    .color , #color-view{
         width: 20px;
         height: 20px;
-      
+        border: 0.5px solid gray;
+    
+    }
+    #span-color-view{
+        text-align: center;
     }
 </style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     let xE = {};
-
+  
+    function cancel(){
+        let color_popup=document.getElementById("color-popup");
+        color_popup.style.visibility="hidden";
+    }
+   
     function xFn(e)
     {
         
         xE.frame.focus();
-   
+        
       
         let content = e;
             view = content+ xE.draw.queryCommandSupported(content);
+      
+
         if(content==="foreColor"){
-            let aa=document.getElementById("aa").value;
-            xE.draw.execCommand(content, false,aa); 
+            let color_popup=document.getElementById("color-popup");
+            color_popup.style.visibility="visible";
+
+         
+            // let aa=document.getElementById("aa").value;
+            // xE.draw.execCommand(content, false,aa); 
            
         }
       
@@ -139,100 +169,104 @@
         <img src="public/text-color.png" alt="foreColor" onclick="xFn(this.alt)"></img>
         <span id="color-popup">
             <span id="color-setting">
-                <input type=text size=8>
-                <button class="cancel">X</button>
+                <input type=text size=8 id="color-result">
+                <button id="color-search">적용</button>
+                <button class="cancel" onclick="cancel()">X</button>
             </span>
+            <sapn id="span-color-view">
+                색상 : <button id="color-view"></button>
+            </sapn>
             <span id="text-color-view">
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
-                    <button class="color"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#787878;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF8C8C;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFC846;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FAFAA0;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#4AB34A;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#00F2F2;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#333380 ;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#9048d4;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#fff;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#6e6e6e;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF8282;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFC341;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FAFA96;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#40A940;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#00EDED;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#282880;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#8f31ea;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#eee;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#646464;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF7878;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFBE3C;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FAF58C;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#369F36;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#00D5F2;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#002e80;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#8b00ff;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#ddd;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#5a5a5a;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF6E6E;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFB937;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FAF082;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#2C952C;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#00C1F2;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#001e80;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#a22bff;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#dcdcdc;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#505050;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF6464;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFB432;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FAEB78;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#228B22;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#00AFF4 ;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#000f80;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#9b21ff;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#d2d2d2;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#464646;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF5A5A;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFB900;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFEB46;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#288C28;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#0094F7 ;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#1e1e80;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#9314ff;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#c8c8c8;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#3c3c3c;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF5050;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFAF00;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFE641;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#1E821E;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#007BF7;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#141480;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#8b00ff;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#bebebe;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#323232;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF4646;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFA500;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFE13C;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#147814;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#005AF7;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#0a0a80;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#8300f8;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#b4b4b4;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#282828;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF3232;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF9B00;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFDC37;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#0A6E0A;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#0020F7;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#000080;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#7b00f0;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#aaaaaa;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#000;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF0000;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FF9100;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#FFD732;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#006400;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#0004F9;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#0f0080;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#7300e9;"></button>
+                   <button class="color" onclick="color(this)" style="background-color:#a0a0a0 ;"></button>
             </span>
         </span>
     </sapn>
@@ -247,6 +281,14 @@
     <!-- <img type=img onclick="xHv()">HTML</img> -->
 </div>
 <iframe id="yF" src="about:blank" ></iframe>
-
+<script>
+     function color(e){
+        alert( $(e).attr('style'));
+        let color_view=document.getElementById("color-view");
+        color_view.stlye.color='rgba( 255,  60, 50, 0)';;
+                // alert(color);
+           
+    }
+</script>
 </body>
 </html>
