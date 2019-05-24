@@ -75,7 +75,7 @@
     }
     #color-view{
         margin-top: 5px;
-        
+        background: #000;
     }
     .color , #color-view{
         width: 20px;
@@ -90,11 +90,12 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     let xE = {};
-  
+
     function cancel(){
         let color_popup=document.getElementById("color-popup");
         color_popup.style.visibility="hidden";
     }
+
    
     function xFn(e)
     {
@@ -109,11 +110,7 @@
         if(content==="foreColor"){
             let color_popup=document.getElementById("color-popup");
             color_popup.style.visibility="visible";
-
-         
-            // let aa=document.getElementById("aa").value;
-            // xE.draw.execCommand(content, false,aa); 
-           
+            // xE.draw.execCommand(content, false,color); 
         }
       
         // e = e.nextSibling;
@@ -169,8 +166,8 @@
         <img src="public/text-color.png" alt="foreColor" onclick="xFn(this.alt)"></img>
         <span id="color-popup">
             <span id="color-setting">
-                <input type=text size=8 id="color-result">
-                <button id="color-search">적용</button>
+                <input type=text size=8 id="color-result"placeholder="ex)FFFFFF">
+                <button id="color-search" onclick="color_search()" >검색</button>
                 <button class="cancel" onclick="cancel()">X</button>
             </span>
             <sapn id="span-color-view">
@@ -282,13 +279,16 @@
 </div>
 <iframe id="yF" src="about:blank" ></iframe>
 <script>
-     function color(e){
-        alert( $(e).attr('style'));
-        let color_view=document.getElementById("color-view");
-        color_view.stlye.color='rgba( 255,  60, 50, 0)';;
-                // alert(color);
-           
+ 
+    function color_search(){
+        const color_result=document.getElementById("color-result").value;
+        $("#color-view").css("background-color","#"+color_result);
     }
+    function color(event){
+        let color = $(event).css( "background-color" );
+        $("#color-view").css("background-color",color);
+        xE.draw.execCommand("foreColor", false,color); 
+   }       
 </script>
 </body>
 </html>
