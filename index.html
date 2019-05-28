@@ -115,6 +115,28 @@
     img:checked{
         background-color: #000;
     }
+    #link{
+        width: 250px;
+        height: 30px;
+        position: relative;
+       
+    }
+    #link_popup{
+        width: 250px;
+        height: 30px;
+        left: 0px;
+        top:0px;
+        margin: auto;
+        text-align: center;
+        z-index: 1;
+        background: #eee;
+        position: absolute;
+        visibility: hidden;
+      
+    }
+    #link_btn{
+        margin-top: 3px;
+    }
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
@@ -127,24 +149,33 @@
     {
         
         xE.frame.focus();
-        
       
     
         xE.draw.queryCommandSupported(e);
         let color_popup=document.getElementById("color-popup");
         let back_color_popup=document.getElementById("backgorund-color-popup");
+        let link_popup=document.getElementById("link_popup");
+                   
         if(e==="foreColor"){
-          
             color_popup.style.visibility="visible";
             back_color_popup.style.visibility="hidden";
+            link_popup.style.visibility="hidden";
         }else if(e==="backColor"){
-         
            back_color_popup.style.visibility="visible";
            color_popup.style.visibility="hidden";
+           link_popup.style.visibility="hidden";
+        }else if(e==="createLink"){
+            link_popup.style.visibility="visible";
+            back_color_popup.style.visibility="hidden";
+           color_popup.style.visibility="hidden";
+           document.getElementById("link_input").focus();
+   
         }else{
             xE.draw.execCommand(e, false); 
         }
-      
+       
+   
+       
         // e = e.nextSibling;
         // e = e.nodeName.toLowerCase() == 'input' ? e.value : null;
    
@@ -157,6 +188,9 @@
         // view += '<br>execCommand : ';
        
         // xE.m.innerHTML = view;
+     
+      
+      
     }
 
     function xHv()
@@ -332,26 +366,46 @@
                 </span>
             </span>
     </span>
-    <!-- <img src="public/text-size.png" alt="fontSize" onclick="xFn(this.alt)"></img><input type=text size=2> -->
     <img src="public/left-alignment.png" alt="justifyLeft" onclick="xFn(this.alt)"></img>
     <img src="public/center-alignment.png" alt="justifyCenter" onclick="xFn(this.alt)"></img>
     <img src="public/right-alignment.png" alt="justifyRight" onclick="xFn(this.alt)"></img>
-    <img src="public/link.png" alt="createLink" onclick="xFn(this.alt)"></img><input type=text size=16>
-    <img src="public/image.png" alt="insertImage" onclick="xFn(this.alt)"></img><input type=text size=16>
+    <span id="link"> 
+        <img src="public/link.png" alt="createLink" onclick="xFn(this.alt)"></img>
+        <span id="link_popup">
+            <span id="link_input_view">
+                <input type=text size=16 id="link_input">
+                <button id="link_btn" onclick="link()">적용</button>
+            </span>
+        </span>
+    </span>
+    <input multiple="multiple"  type="file" name="filename[]" onchange='openFile(event)' />
+    <!-- <img src="public/image.png" alt="insertImage" onclick="xFn(this.alt)"></img><input type=text size=16> -->
     <!-- <img type=img onclick="xHv()">HTML</img> -->
 </div>
-<iframe id="yF" src="about:blank" ></iframe>
+<iframe id="yF" src="about:blank"></iframe>
 <script>
+    let if_mo;
+    document.getElementById('yF').addEventListener('mouseover',function(){
+        if_mo=true;
+    });
+    window.addEventListener('blur',function(){
+        if(if_mo){
+            link_popup.style.visibility="hidden";
+            if_mo=false;
+        }
+    });
+   
     $('#font_family').change(function() {
             const font_family = $(this).val();
             xE.draw.execCommand("fontName", false, font_family); 
     });
     $('#font_size').change(function() {
             const font_size = $(this).val();
-           
             xE.draw.execCommand("fontSize", false, font_size); 
           
     });
+
+ 
     function color_search(){
         const tcolor_result=$("#tcolor-result").val();
         $("#tcolor_view").css("background-color","#"+tcolor_result);
@@ -378,6 +432,35 @@
         color_popup.style.visibility="hidden";
         back_color_popup.style.visibility="hidden";
     }
+    function link(){
+        const link_input=document.getElementById("link_input").value;
+        link_popup.style.visibility="hidden";
+        xE.draw.execCommand("createLink", false,link_input); 
+    }
+
+    	
+    var openFile = function(event) {
+            const input = event.target;
+			var reader = new FileReader();
+			alert(reader.result);
+
+            reader.onload = function(){
+                alert("a");
+                // xE.draw.execCommand("insertImage", false,reader.result); 
+					// var _mockdata = {
+					// 	'imageurl':,
+					// 	'filename': input.files[i].name,
+					// 	'filesize': input.files[i].size,
+					// 	'imagealign': 'C',
+					// 	'originalurl': reader.result,
+					// 	'thumburl':reader.result
+					// };
+				
+				
+			};
+    
+          };
+				
 </script>
 </body>
 </html>
