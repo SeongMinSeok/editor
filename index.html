@@ -202,8 +202,7 @@
                 .replace(/>/g, '&gt;')
     }
 
-    window.onload = function()
-    {
+    window.onload = function(){
         xE.frame = document.getElementById('yF').contentWindow;
         xE.draw = xE.frame.document;
 
@@ -214,6 +213,28 @@
 
         xE.frame.focus();
     }
+  
+    function openFile (event) {
+            var input = event.target;
+			var reader = new FileReader();
+			// alert(reader.result);
+        
+            reader.onload = function(){
+                alert("a");
+                // xE.draw.execCommand("insertImage", false,reader.result); 
+					// var _mockdata = {
+					// 	'imageurl':,
+					// 	'filename': input.files[i].name,
+					// 	'filesize': input.files[i].size,
+					// 	'imagealign': 'C',
+					// 	'originalurl': reader.result,
+					// 	'thumburl':reader.result
+					// };
+				
+				
+			};
+    
+          };
 </script>
 </head>
 <body>
@@ -378,7 +399,8 @@
             </span>
         </span>
     </span>
-    <input multiple="multiple"  type="file" name="filename[]" onchange='openFile(event)' />
+    <!-- onchange='openFile(event)' -->
+    <input multiple="multiple"  type="file" name="filename[]" id ="file" />
     <!-- <img src="public/image.png" alt="insertImage" onclick="xFn(this.alt)"></img><input type=text size=16> -->
     <!-- <img type=img onclick="xHv()">HTML</img> -->
 </div>
@@ -438,28 +460,16 @@
         xE.draw.execCommand("createLink", false,link_input); 
     }
 
-    	
-    var openFile = function(event) {
-            const input = event.target;
-			var reader = new FileReader();
-			alert(reader.result);
-
-            reader.onload = function(){
-                alert("a");
-                // xE.draw.execCommand("insertImage", false,reader.result); 
-					// var _mockdata = {
-					// 	'imageurl':,
-					// 	'filename': input.files[i].name,
-					// 	'filesize': input.files[i].size,
-					// 	'imagealign': 'C',
-					// 	'originalurl': reader.result,
-					// 	'thumburl':reader.result
-					// };
-				
-				
-			};
-    
-          };
+    var file = document.getElementById('file');
+    file.onchange = function(e) {
+        var fileReader = new FileReader();
+        alert(e.target);
+        fileReader.onload = function(e) {
+                alert(e.target.result);
+        }
+       
+    }
+   
 				
 </script>
 </body>
