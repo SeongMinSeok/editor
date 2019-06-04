@@ -20,7 +20,7 @@
     }
     iframe{
         width: 1000px;
-        height: 600px;
+        height: 1000px;
         padding:0px 5px;
         border-bottom: 1px solid gray;
         border-right: 1px solid gray;
@@ -137,8 +137,10 @@
     #link_btn{
         margin-top: 3px;
     }
+ 
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <script>
     let xE = {};
 
@@ -213,28 +215,45 @@
 
         xE.frame.focus();
     }
-  
-    function openFile (event) {
-            var input = event.target;
-			var reader = new FileReader();
-			// alert(reader.result);
-        
-            reader.onload = function(){
-                alert("a");
-                // xE.draw.execCommand("insertImage", false,reader.result); 
-					// var _mockdata = {
-					// 	'imageurl':,
-					// 	'filename': input.files[i].name,
-					// 	'filesize': input.files[i].size,
-					// 	'imagealign': 'C',
-					// 	'originalurl': reader.result,
-					// 	'thumburl':reader.result
-					// };
-				
-				
-			};
+    $(function() {
+            $("#img").on('change', function(){
+                readURL(this);
+            });
+        });
+
+        function readURL(input) {
+            // xE.frame.focus();
+
+            if (input.files && input.files[0]) {
+                sel_img = [];
+
+                var img = input.files;
+                var imgArr = Array.prototype.slice.call(img);
     
-          };
+                imgArr.forEach(function(f) {
+                    if(!f.type.match("image.*")) {
+                        alert("확장자는 이미지 확장자만 가능합니다.");
+                        return;
+                    }else if(f.type.match("image.*")){
+
+                        sel_img.push(f);
+                        
+                        let reader = new FileReader();
+                        reader.onload = function(e) {
+                            xE.draw.execCommand("insertImage", false,e.target.result);
+                            $('#yF').contents().find('img').addClass("img_view");
+                            $('#yF').contents().find('img').css('width','700px');
+                        }
+                        reader.readAsDataURL(f);
+                    }
+    
+                    
+                });
+               
+            
+            }
+        }
+
 </script>
 </head>
 <body>
@@ -399,13 +418,16 @@
             </span>
         </span>
     </span>
+ 
     <!-- onchange='openFile(event)' -->
-    <input multiple="multiple"  type="file" name="filename[]" id ="file" />
+    <input multiple="multiple"  type="file" name="filename[]" id ="img"  accept="image/jpeg/*[, MIME_TYPES]"/>
     <!-- <img src="public/image.png" alt="insertImage" onclick="xFn(this.alt)"></img><input type=text size=16> -->
     <!-- <img type=img onclick="xHv()">HTML</img> -->
 </div>
 <iframe id="yF" src="about:blank"></iframe>
 <script>
+
+    
     let if_mo;
     document.getElementById('yF').addEventListener('mouseover',function(){
         if_mo=true;
@@ -460,16 +482,8 @@
         xE.draw.execCommand("createLink", false,link_input); 
     }//a
 
-    var file = document.getElementById('file');
-    file.onchange = function(e) {
-        var fileReader = new FileReader();
-        alert(e.target);
-        fileReader.onload = function(e) {
-                alert(e.target.result);
-        }
-       
-    }
    
+  
 				
 </script>
 </body>
