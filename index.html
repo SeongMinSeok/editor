@@ -20,7 +20,7 @@
     }
     iframe{
         width: 1000px;
-        height: 1000px;
+        height: 700px;
         padding:0px 5px;
         border-bottom: 1px solid gray;
         border-right: 1px solid gray;
@@ -137,7 +137,14 @@
     #link_btn{
         margin-top: 3px;
     }
- 
+    #content{
+        visibility: hidden;
+    }
+    #save{
+        display: block;
+        width: 50px;
+        height: 30px;
+    }
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
@@ -178,19 +185,6 @@
        
    
        
-        // e = e.nextSibling;
-        // e = e.nodeName.toLowerCase() == 'input' ? e.value : null;
-   
-        // view += '<br>queryCommandEnabled : ';
-        // try { view += xE.draw.queryCommandEnabled(content); } catch (x) { view += 'Error : ' + x.message; }
-        // view += '<br>queryCommandState : ';
-        // try { view += xE.draw.queryCommandState(content); } catch (x) { view += 'Error : ' + x.message; }
-        // view += '<br>queryCommandValue : ';
-        // try { view += xE.draw.queryCommandValue(content); } catch (x) { view += 'Error : ' + x.message; }
-        // view += '<br>execCommand : ';
-       
-        // xE.m.innerHTML = view;
-     
       
       
     }
@@ -233,6 +227,7 @@
                 imgArr.forEach(function(f) {
                     if(!f.type.match("image.*")) {
                         alert("확장자는 이미지 확장자만 가능합니다.");
+                        $("#img").val("");
                         return;
                     }else if(f.type.match("image.*")){
 
@@ -425,6 +420,9 @@
     <!-- <img type=img onclick="xHv()">HTML</img> -->
 </div>
 <iframe id="yF" src="about:blank"></iframe>
+
+<button onclick="save()" id="save">저장</button>
+<textarea name="content" id="content" cols="100" rows="10"></textarea>
 <script>
 
     
@@ -477,12 +475,17 @@
         back_color_popup.style.visibility="hidden";
     }
     function link(){
+ 
         const link_input=document.getElementById("link_input").value;
         link_popup.style.visibility="hidden";
         xE.draw.execCommand("createLink", false,link_input); 
-    }//a
+    }
 
-   
+    function save(){
+        const content=$("#yF").contents().find("body").html();
+    
+        $("#content").html(content);
+    }
   
 				
 </script>
