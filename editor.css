@@ -1,0 +1,152 @@
+
+body{
+    width: 100%;
+    text-align: center;
+}
+#toolbar{
+    width: 1000px;
+    height: 30px;
+    border: 1px solid gray;
+    margin: auto;
+    text-align: left;
+    padding: 5px;
+
+   
+}
+iframe{
+  
+    width: 1000px;
+    height: 700px;
+    padding:0px 5px;
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+  
+}
+.text-color{
+  width: 250px;
+  height: 250px;
+  position: relative;
+
+}
+#color-popup{
+    width: 250px;
+    height: 300px;
+    left: 0px;
+    top:0px;
+    z-index: 1;
+    background: #eee;
+    position: absolute;
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.text-color-view{
+    margin: 13px;
+    width: 227px;
+    height: 200px;
+    z-index: 1;
+}
+.color-result{
+    margin: 3px;
+    height: 20px;
+    float: left;
+}
+.cancel{
+    margin: 3px;
+    float: right;
+}
+.color-search{
+    margin-top:3px;
+    height: 25px;
+}
+#font_size{
+    padding-top: 5px;
+}
+#font_family{
+   float: left;
+   margin-right: 3px;
+}
+.select{
+    height: 30px;
+}
+#color-view{
+    margin-top: 5px;
+    background: #000;
+}
+.color , .color-view{
+    width: 20px;
+    height: 20px;
+    border: 0.5px solid gray;
+
+}
+.span-color-view{
+    text-align: center;
+}
+#backgorund-color-popup{
+    width: 270px;
+    height: 100px;
+    left: 0px;
+    top:0px;
+    z-index: 1;
+    background: #eee;
+    position: absolute;
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+}
+#background-color-view{
+    width: 260px;
+    height: 44px;
+    margin: 10px 3px;
+    text-align: center;
+}
+.background-color{
+    width: 22px;
+    height: 22px;
+}
+#img_btn{
+   position: absolute;
+   padding-top: 3px;
+   margin-left: 3px;
+   width: 23px;
+   height: 23px;
+}
+#img{
+    display: none;
+}
+#link{
+    width: 250px;
+    height: 30px;
+    position: relative;
+   
+}
+#link_popup{
+    width: 250px;
+    height: 30px;
+    left: 0px;
+    top:0px;
+    margin: auto;
+    text-align: center;
+    z-index: 1;
+    background: #eee;
+    position: absolute;
+    visibility: hidden;
+  
+}
+#link_btn{
+    margin-top: 3px;
+}
+#content{
+    visibility: hidden;
+}
+#btn_save{
+    width: 300px;
+}
+#save{
+    width: 50px;
+    height: 30px;
+   
+}
